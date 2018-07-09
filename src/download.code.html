@@ -24,25 +24,6 @@
 </head>
 
 <body  id="download">
-    <script>
-      var gaKey = "{{.GAKey}}";
-      if (gaKey != "") {
-        (function (i, s, o, g, r, a, m) {
-          i['GoogleAnalyticsObject'] = r;
-          i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-          }, i[r].l = 1 * new Date();
-          a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-          a.async = 1;
-          a.src = g;
-          m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', gaKey, 'transfer.sh');
-        ga('send', 'pageview');
-      }
-    </script>
-
     <div id="navigation">
         <div class="wrapper">
             <h1>transfer.sh</h1>
@@ -92,43 +73,9 @@
 </section>
 
 
-    <script>
-    (function() {
-      var userVoiceKey = "{{.UserVoiceKey}}";
-      if (userVoiceKey != "") {
-        var uv = document.createElement('script');
-        uv.type = 'text/javascript';
-        uv.async = true;
-        uv.src = '//widget.uservoice.com/{{.UserVoiceKey}}.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(uv, s);
-      }
-    })()
-    </script>
-
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
-    <script>
-      var gaKey = "{{.GAKey}}";
-      if (gaKey != "") {
-        (function(b, o, i, l, e, r) {
-          b.GoogleAnalyticsObject = l;
-          b[l] || (b[l] =
-            function() {
-              (b[l].q = b[l].q || []).push(arguments)
-            });
-          b[l].l = +new Date;
-          e = o.createElement(i);
-          r = o.getElementsByTagName(i)[0];
-          e.src = '//www.google-analytics.com/analytics.js';
-          r.parentNode.insertBefore(e, r)
-        }(window, document, 'script', 'ga'));
-        ga('create', gaKey, 'transfer.sh');
-        ga('send', 'pageview');
-      }
-    </script>
 
         <!-- build:js scripts/main.js -->
         <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -138,7 +85,7 @@
         <script src="/scripts/showdown.js"></script>
         <script src="/scripts/main.js"></script>
         <!-- endbuild -->
-        
+
     <script>
 
     var text = "# Markdown *works*.";
