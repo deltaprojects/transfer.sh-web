@@ -26,48 +26,46 @@ include "includes/navigation.html"
                     <code class="code-wrapper"><span class="code-title"># Upload using cURL</span>
                         $ curl --upload-file ./hello.txt {{.WebAddress}}hello.txt {{.WebAddress}}66nb8/hello.txt
 
-                            <span class="code-title"># Using the shell function</span>
-                            $ transfer hello.txt
-                            ##################################################### 100.0% https://{{.WebAddress}}eibhM/hello.txt
-                        </code>
-                    </div>
-                    <div id="web">
-                        <code class="code-wrapper">
-                            <span class="code-title"># Upload from web</span>
-                            Drag your files here, or <a class="browse" href="#"> click to browse.</a>
-                        </code>
-                        <input type="file" multiple="multiple" style='display: none;' />
-                        <ul class='queue'>
-                            <li>
-                            </li>
-                        </ul>
-                        <div class='all-files'>
-                            <br>
-                            <div>
-                                <span class="code-title"># Download all your files</span>
-                                <br/>
-                                <br/>
-                                <a class="download-zip btn-cta" href="#">zip</a> <a class="download-tar btn-cta" href="#">tar.gz</a>
-                            </div>
+                        <span class="code-title"># Using the shell function</span>
+                        $ transfer hello.txt
+                        ##################################################### 100.0% {{.WebAddress}}eibhM/hello.txt
+                    </code>
+                </div>
+                <div id="web">
+                    <code class="code-wrapper">
+                        <span class="code-title"># Upload from web</span>
+                        Drag your files here, or <a class="browse" href="#"> click to browse.</a>
+                    </code>
+                    <input type="file" multiple="multiple" style='display: none;' />
+                    <ul class='queue'>
+                        <li>
+                        </li>
+                    </ul>
+                    <div class='all-files'>
+                        <br>
+                        <div>
+                            <span class="code-title"># Download all your files</span>
+                            <br/>
+                            <br/>
+                            <a class="download-zip btn-cta" href="#">zip</a> <a class="download-tar btn-cta" href="#">tar.gz</a>
                         </div>
                     </div>
                 </div>
-
-                <div>
-                    <a href="#features" class="btn-cta btn-home">learn more</i> </a>
-                </div>
             </div>
-    </section>
+        </div>
+    </div>
+</section>
 
-    <section id="samples">
-        <div class="wrapper">
-            <a class="btn-cta" data-target="#coll" data-toggle="collapse">More examples</a>
+<section id="samples">
+    <div class="wrapper">
+        <a class="btn-cta" data-target="#coll" data-toggle="collapse">More examples</a>
 
-            <div class="collapse " id="coll">
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <h3>How to upload</h3>
-                        <div class="terminal-top">
+        <div class="collapse " id="coll">
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <h3>How to upload</h3>
+                <div class="terminal-top">
 
                 </div>
                 <div class="terminal">
@@ -84,7 +82,7 @@ include "includes/navigation.html"
                 </div>
             </div>
             <div class="col-md-6 ">
-                <h3>Add shell function to .bashrc or .zshrc</a></h3>
+                <h3>Add shell function to .bashrc or .zshrc</h3>
                 <div class="terminal-top">
                 </div>
                 <div class="terminal">
@@ -97,7 +95,6 @@ include "includes/navigation.html"
                 </div>
             </div>
         </div>
-
 
             <div class="row">
                 <div class="col-md-6 ">
@@ -256,9 +253,8 @@ include "includes/navigation.html"
     </div>
 </section>
 
-
-
-    include "includes/js.html"
+include "includes/footer.html"
+include "includes/js.html"
 
 
 </body>
