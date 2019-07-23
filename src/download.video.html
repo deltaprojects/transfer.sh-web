@@ -6,37 +6,42 @@
 <html class="no-js">
 <!--<![endif]-->
 
-include "includes/head.html"
+include "includes/download-head.html"
 
 <body  id="download">
+<script src="../scripts/vendor/video.js"></script>
 
-    include "includes/navigation.html"
+include "includes/ga.html"
+include "includes/download-navigation.html"
 
-    <section id="home">
-        <div class="wrapper">
+<section id="home">
+    <div class="wrapper">
 
-            include "includes/download-top.html"
+        include "includes/download-top.html"
 
-            <div class="row animated fadeInDown">
-                <div id="from-terminal" class=" box col-md-8  col-md-offset-2 col-xs-12">
-                    <div class="terminal-top">
+        <div class="row animated fadeInDown">
+            <div id="from-terminal" class=" box col-md-8  col-md-offset-2 col-xs-12">
+                <div class="terminal-top">
 
-                    </div>
-                    <div id="terminal" class="terminal preview-image">
-                        <video data-color="#f6f8f8" src="{{.Url}}" type="{{.ContentType}}"></video>
-                    </div>
+                </div>
+                <div id="terminal" class="terminal preview-image">
+                    <video id="video-player"
+                           class="video-js vjs-default-skin"
+                           controls
+                           preload="auto"
+                           data-setup='{}'>
+                        <source src="{{.Url}}" type="{{.ContentType}}"></source>
+                    </video>
                 </div>
             </div>
-            <br/>
-            </div>
+        </div>
+        <br/>
+    </div>
 
-    </section>
+</section>
 
-    include "includes/js.html"
-
-    <!-- build:js /scripts/ckin.js -->
-    <script src="/scripts/ckin.js"></script>
-    <!-- endbuild -->
+include "includes/download-footer.html"
+include "includes/download-js.html"
 
 </body>
 

@@ -11,24 +11,24 @@ include "includes/head.html"
 
 <body>
 
-    include "includes/navigation.html"
+include "includes/navigation.html"
 
-    <section id="home">
-        <div class="wrapper">
-            <h2 class="page-title">
-                Easy file sharing from the command line</h2>
-            <div class="row animated fadeInDown">
-                <div id="from-terminal" class="box col-md-8 col-md-offset-2 col-xs-12">
-                    <div class="terminal-top">
+<section id="home">
+    <div class="wrapper">
+        <h2 class="page-title">
+            Easy file sharing from the command line</h2>
+        <div class="row animated fadeInDown">
+            <div id="from-terminal" class="box col-md-8 col-md-offset-2 col-xs-12">
+                <div class="terminal-top">
 
-                    </div>
-                    <div id="terminal" class="terminal">
-                        <code class="code-wrapper"><span class="code-title"># Upload using cURL</span>
-                            $ curl --upload-file ./hello.txt https://filedrop.deltaprojects.com/hello.txt https://filedrop.deltaprojects.com/66nb8/hello.txt
+                </div>
+                <div id="terminal" class="terminal">
+                    <code class="code-wrapper"><span class="code-title"># Upload using cURL</span>
+                        $ curl --upload-file ./hello.txt {{.WebAddress}}hello.txt {{.WebAddress}}66nb8/hello.txt
 
                             <span class="code-title"># Using the shell function</span>
                             $ transfer hello.txt
-                            ##################################################### 100.0% https://filedrop.deltaprojects.com/eibhM/hello.txt
+                            ##################################################### 100.0% https://{{.WebAddress}}eibhM/hello.txt
                         </code>
                     </div>
                     <div id="web">
@@ -52,6 +52,10 @@ include "includes/head.html"
                         </div>
                     </div>
                 </div>
+
+                <div>
+                    <a href="#features" class="btn-cta btn-home">learn more</i> </a>
+                </div>
             </div>
     </section>
 
@@ -65,176 +69,192 @@ include "includes/head.html"
                         <h3>How to upload</h3>
                         <div class="terminal-top">
 
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Uploading is easy using curl</span>
-                                $ curl --upload-file ./hello.txt https://filedrop.deltaprojects.com/hello.txt
-                                https://filedrop.deltaprojects.com/66nb8/hello.txt
-
-                                $ curl -H "Max-Downloads: 1" -H "Max-Days: 5" --upload-file ./hello.txt https://filedrop.deltaprojects.com/hello.txt
-                                https://filedrop.deltaprojects.com/66nb8/hello.txt
-
-                                <span class="code-title"># Download the file</span>
-                                $ curl https://filedrop.deltaprojects.com/66nb8/hello.txt -o hello.txt
-                            </code>
-                        </div>
-                    </div>
-                    <div class="col-md-6 ">
-                        <h3>Add shell function to .bashrc or .zshrc</a></h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Add this to .bashrc or .zshrc or its equivalent</span>
-                                transfer(){ if [ $# -eq 0 ];then echo &quot;No arguments specified.\nUsage:\n  transfer &lt;file|directory&gt;\n  ... | transfer &lt;file_name&gt;&quot;&gt;&amp;2;return 1;fi;if tty -s;then file=&quot;$1&quot;;file_name=$(basename &quot;$file&quot;);if [ ! -e &quot;$file&quot; ];then echo &quot;$file: No such file or directory&quot;&gt;&amp;2;return 1;fi;if [ -d &quot;$file&quot; ];then file_name=&quot;$file_name.zip&quot; ,;(cd &quot;$file&quot;&amp;&amp;zip -r -q - .)|curl --progress-bar --upload-file &quot;-&quot; &quot;https://filedrop.deltaprojects.com/$file_name&quot;|tee /dev/null,;;else cat &quot;$file&quot;|curl --progress-bar --upload-file &quot;-&quot; &quot;https://filedrop.deltaprojects.com/$file_name&quot;|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file &quot;-&quot; &quot;https://filedrop.deltaprojects.com/$file_name&quot;|tee /dev/null;fi;}
-
-                                <span class="code-title"># Now you can use transfer function</span>
-                                $ transfer hello.txt
-                            </code>
-                        </div>
-                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <h3>Upload multiple files at once</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper">
-                                $ curl -i -F filedata=@/tmp/hello.txt -F filedata=@/tmp/hello2.txt https://filedrop.deltaprojects.com/
+                <div class="terminal">
+                    <code class="code-wrapper"><span class="code-title"># Uploading is easy using curl</span>
+                        $ curl --upload-file ./hello.txt {{.WebAddress}}hello.txt
+                    {{.WebAddress}}66nb8/hello.txt
 
-                                <span class="code-title"># Combining downloads as zip or tar archive</span>
-                                $ curl https://filedrop.deltaprojects.com/(15HKz/hello.txt,15HKz/hello.txt).tar.gz
-                                $ curl https://filedrop.deltaprojects.com/(15HKz/hello.txt,15HKz/hello.txt).zip
-                            </code>
-                        </div>
+                        $ curl -H "Max-Downloads: 1" -H "Max-Days: 5" --upload-file ./hello.txt {{.WebAddress}}hello.txt
+                    {{.WebAddress}}66nb8/hello.txt
+
+                        <span class="code-title"># Download the file</span>
+                        $ curl {{.WebAddress}}66nb8/hello.txt -o hello.txt
+                    </code>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <h3>Add shell function to .bashrc or .zshrc</a></h3>
+                <div class="terminal-top">
+                </div>
+                <div class="terminal">
+                    <code class="code-wrapper"><span class="code-title"># Add this to .bashrc or .zshrc or its equivalent</span>
+                        transfer(){ if [ $# -eq 0 ];then echo &quot;No arguments specified.\nUsage:\n  transfer &lt;file|directory&gt;\n  ... | transfer &lt;file_name&gt;&quot;&gt;&amp;2;return 1;fi;if tty -s;then file=&quot;$1&quot;;file_name=$(basename &quot;$file&quot;);if [ ! -e &quot;$file&quot; ];then echo &quot;$file: No such file or directory&quot;&gt;&amp;2;return 1;fi;if [ -d &quot;$file&quot; ];then file_name=&quot;$file_name.zip&quot; ,;(cd &quot;$file&quot;&amp;&amp;zip -r -q - .)|curl --progress-bar --upload-file &quot;-&quot; &quot;{{.WebAddress}}$file_name&quot;|tee /dev/null,;else cat &quot;$file&quot;|curl --progress-bar --upload-file &quot;-&quot; &quot;{{.WebAddress}}$file_name&quot;|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file &quot;-&quot; &quot;{{.WebAddress}}$file_name&quot;|tee /dev/null;fi;}
+
+                        <span class="code-title"># Now you can use transfer function</span>
+                        $ transfer hello.txt
+                    </code>
+                </div>
+            </div>
+        </div>
 
 
+            <div class="row">
+                <div class="col-md-6 ">
+                    <h3>Upload multiple files at once</h3>
+                    <div class="terminal-top">
                     </div>
-                    <div class="col-md-6 ">
-                        <h3>Encrypt your files before the transfer</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Encrypt files with password using gpg</span>
-                                $ cat /tmp/hello.txt|gpg -ac -o-|curl -X PUT --upload-file "-" https://filedrop.deltaprojects.com/test.txt
+                    <div class="terminal">
+                        <code class="code-wrapper">
+                            $ curl -i -F filedata=@/tmp/hello.txt -F filedata=@/tmp/hello2.txt {{.WebAddress}}
 
-                                <span class="code-title"># Download and decrypt</span>
-                                $ curl https://filedrop.deltaprojects.com/1lDau/test.txt|gpg -o- > /tmp/hello.txt
-                            </code>
-                        </div>
+                            <span class="code-title"># Combining downloads as zip or tar archive</span>
+                            $ curl {{.WebAddress}}(15HKz/hello.txt,15HKz/hello.txt).tar.gz
+                            $ curl {{.WebAddress}}(15HKz/hello.txt,15HKz/hello.txt).zip
+                        </code>
                     </div>
+
 
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Scan for malware</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Scan for malware or viruses using Clamav</span>
-                                $ wget http://www.eicar.org/download/eicar.com
-                                $ curl -X PUT --upload-file ./eicar.com https://filedrop.deltaprojects.com/eicar.com/scan
+                <div class="col-md-6 ">
+                    <h3>Encrypt your files before the transfer</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Encrypt files with password using gpg</span>
+                            $ cat /tmp/hello.txt|gpg -ac -o-|curl -X PUT --upload-file "-" {{.WebAddress}}test.txt
 
-                                <span class="code-title"># Upload malware to VirusTotal, get a permalink in return</span>
-                                $ curl -X PUT --upload-file nhgbhhj https://filedrop.deltaprojects.com/test.txt/virustotal
-                            </code>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Backup mysql database, encrypt and transfer</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Backup, encrypt and transfer</span>
-                                $ mysqldump --all-databases|gzip|gpg -ac -o-|curl -X PUT --upload-file "-" https://filedrop.deltaprojects.com/test.txt</code>
-                        </div>
+                            <span class="code-title"># Download and decrypt</span>
+                            $ curl {{.WebAddress}}1lDau/test.txt|gpg -o- > /tmp/hello.txt
+                        </code>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Send email with transfer link (uses shell function)</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Transfer and send email with link (uses shell function)</span>
-                                $ transfer /tmp/hello.txt | mail -s "Hello World" user@yourmaildomain.com
-                            </code>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Using <a href="https://keybase.io/">Keybase.io</a></h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Import keys from keybase</span>
-                                $ keybase track [them]
-                                <span class="code-title"># Encrypt for recipient(s)</span>
-                                $ cat somebackupfile.tar.gz | keybase encrypt [them] | curl --upload-file '-' https://filedrop.deltaprojects.com/test.txt
-                                <span class="code-title"># Decrypt</span>
-                                $ curl https://filedrop.deltaprojects.com/sqUFi/test.md |keybase decrypt
-                            </code>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>wget uploads also supported</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># wget</span>
-                                $ wget --method PUT --body-file=/tmp/file.tar https://filedrop.deltaprojects.com/file.tar -O - -nv
-                            </code>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Transfer pound logs</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># grep syslog for pound and transfer</span>
-                                $ cat /var/log/syslog|grep pound|curl --upload-file - https://filedrop.deltaprojects.com/pound.log
-                            </code>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
 
-                    <div class="col-md-6">
-                        <h3>Upload a file using Powershell</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Upload using Powershell</span>
-                                PS H:\&gt; invoke-webrequest -method put -infile .\file.txt https://filedrop.deltaprojects.com/file.txt
-                            </code>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Scan for malware</h3>
+                    <div class="terminal-top">
                     </div>
-                    <div class="col-md-6">
-                        <h3>Upload a file using HTTPie</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># HTTPie</span>
-                                $ http https://filedrop.deltaprojects.com/ -vv &lt; /tmp/test.log
-                            </code>
-                        </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Scan for malware or viruses using Clamav</span>
+                            $ wget http://www.eicar.org/download/eicar.com
+                            $ curl -X PUT --upload-file ./eicar.com {{.WebAddress}}eicar.com/scan
+
+                            <span class="code-title"># Upload malware to VirusTotal, get a permalink in return</span>
+                            $ curl -X PUT --upload-file nhgbhhj {{.WebAddress}}test.txt/virustotal
+                        </code>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Send us your awesome example</h3>
-                        <div class="terminal-top">
-                        </div>
-                        <div class="terminal">
-                            <code class="code-wrapper"><span class="code-title"># Your awesome sample will be put here</span>
-                            </code>
-                        </div>
+                <div class="col-md-6">
+                    <h3>Backup mysql database, encrypt and transfer</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Backup, encrypt and transfer</span>
+                            $ mysqldump --all-databases|gzip|gpg -ac -o-|curl -X PUT --upload-file "-" {{.WebAddress}}test.txt</code>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Send email with transfer link (uses shell function)</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Transfer and send email with link (uses shell function)</span>
+                            $ transfer /tmp/hello.txt | mail -s "Hello World" user@yourmaildomain.com
+                        </code>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Using <a href="https://keybase.io/">Keybase.io</a></h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Import keys from keybase</span>
+                            $ keybase track [them]
+                            <span class="code-title"># Encrypt for recipient(s)</span>
+                            $ cat somebackupfile.tar.gz | keybase encrypt [them] | curl --upload-file '-' {{.WebAddress}}test.txt
+                            <span class="code-title"># Decrypt</span>
+                            $ curl {{.WebAddress}}sqUFi/test.md |keybase decrypt
+                        </code>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>wget uploads also supported</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># wget</span>
+                            $ wget --method PUT --body-file=/tmp/file.tar {{.WebAddress}}file.tar -O - -nv
+                        </code>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Transfer pound logs</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># grep syslog for pound and transfer</span>
+                            $ cat /var/log/syslog|grep pound|curl --upload-file - {{.WebAddress}}pound.log
+                        </code>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h3>Upload a file using Powershell</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Upload using Powershell</span>
+                            PS H:\&gt; invoke-webrequest -method put -infile .\file.txt {{.WebAddress}}file.txt
+                        </code>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Upload a file using HTTPie</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># HTTPie</span>
+                            $ http {{.WebAddress}} -vv &lt; /tmp/test.log
+                        </code>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Upload a file using Unofficially client in Python</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper">
+                            <span class="code-title"># transfersh-cli (https://github.com/tanrax/transfersh-cli)</span>
+                            $ trasnfersh photos.zip
+                            <span class="code-title"># Uploading file</span>
+                            <span class="code-title"># Download from here: {{.WebAddress}}xxxxxx/photos.zip</span>
+                            <span class="code-title"># It has also been copied to the clipboard!</span>
+                        </code>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Send us your awesome example</h3>
+                    <div class="terminal-top">
+                    </div>
+                    <div class="terminal">
+                        <code class="code-wrapper"><span class="code-title"># Your awesome sample will be put here</span>
+                        </code>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 
 

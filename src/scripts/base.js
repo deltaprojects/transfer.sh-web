@@ -1,8 +1,10 @@
+'use strict';
+
 $(document).ready(function() {
 
     // Smooth scrolling
     $('a[href*="#"]:not([href="#"])').click(function() {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+        if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
             var target = $(this.hash);
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             if (target.length) {
@@ -17,12 +19,13 @@ $(document).ready(function() {
 });
 
 (function() {
-    var files = Array()
-    var queue = Array()
+    var files = Array();
+    var queue = Array();
 
     $(window).bind('beforeunload', function(){
-        if (queue.length==0) 
+        if (queue.length===0)  {
             return;
+        }
 
         return 'There are still ' + queue.length + ' files being uploaded.';
     });
@@ -37,20 +40,20 @@ $(document).ready(function() {
 
         var xhr = new XMLHttpRequest();
 
-        xhr.upload.addEventListener("progress", function(e) {
+        xhr.upload.addEventListener('progress', function(e) {
             var pc = parseInt((e.loaded / e.total * 100));
             $('.upload-progress', $(li)).show();
-            $('.upload-progress .bar', $(li)).css('width', pc + "%");
-            $('.upload-progress span  ', $(li)).empty().append(pc + "%");
+            $('.upload-progress .bar', $(li)).css('width', pc + '%');
+            $('.upload-progress span  ', $(li)).empty().append(pc + '%');
 
         }, false);
 
-        xhr.onreadystatechange = function(e) {
-            if (xhr.readyState == 4) {
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
                 /*            $('.upload-progress', $(li)).hide();*/
                 $('#web').addClass('uploading');
                 // progress.className = (xhr.status == 200 ? "success" : "failure");
-                if (xhr.status == 200) {
+                if (xhr.status === 200) {
                     $(li).html('<a target="_blank" href="' + xhr.responseText + '">' + xhr.responseText + '</a>');
                 } else {
                     $(li).html('<span>Error (' + xhr.status + ') during upload of file ' + file.name + '</span>');
@@ -62,35 +65,35 @@ $(document).ready(function() {
                     queue.splice(index, 1);
                 }
 
-                files.push(URI(xhr.responseText.replace("\n", "")).path());
+                files.push(URI(xhr.responseText.replace('\n', '')).path());
 
-                $(".download-zip").attr("href", URI("(" + files.join(",") + ").zip").absoluteTo(location.href).toString());
-                $(".download-tar").attr("href", URI("(" + files.join(",") + ").tar.gz").absoluteTo(location.href).toString());
+                $('.download-zip').attr('href', URI('(' + files.join(',') + ').zip').absoluteTo(location.href).toString());
+                $('.download-tar').attr('href', URI('(' + files.join(',') + ').tar.gz').absoluteTo(location.href).toString());
 
-                $(".all-files").addClass('show');
+                $('.all-files').addClass('show');
             }
         };
 
-        // should queue all uploads. 
+        // should queue all uploads.
         queue.push(xhr);
 
         // start upload
-        xhr.open("PUT", '/' + file.name, true);
+        xhr.open('PUT', './' + file.name, true);
         xhr.send(file);
-    };
+    }
 
-    $(document).bind("dragenter", function(event) {
+    $(document).bind('dragenter', function(event) {
         event.preventDefault();
-    }).bind("dragover", function(event) {
+    }).bind('dragover', function(event) {
         event.preventDefault();
         // show drop indicator
         $('#terminal').addClass('dragged');
         $('#web').addClass('dragged');
-    }).bind("dragleave", function(event) {
+    }).bind('dragleave', function() {
         $('#terminal').removeClass('dragged');
         $('#web').removeClass('dragged');
 
-    }).bind("drop dragdrop", function(event) {
+    }).bind('drop dragdrop', function(event) {
         var files = event.originalEvent.target.files || event.originalEvent.dataTransfer.files;
 
         $.each(files, function(index, file) {
@@ -101,31 +104,31 @@ $(document).ready(function() {
         event.preventDefault();
     });
 
-    $('a.browse').on('click', function(event) {
-        $("input[type=file]").click();
+    $('a.browse').on('click', function() {
+        $('input[type=file]').click();
         return (false);
     });
 
 
-    $('input[type=file]').on('change', function(event) {
+    $('input[type=file]').on('change', function() {
         $.each(this.files, function(index, file) {
             if (file instanceof Blob) {
                 upload(file);
             }
         });
-    });   
+    });
 
-    // clipboard 
-    if (window.location.href.indexOf("download") > -1 ) {
+    // clipboard
+    if (window.location.href.indexOf('download') > -1 ) {
 
 
         (function() {
-            var copylinkbtn = document.getElementById("copy-link-btn"),
-                copylink = document.getElementById("copy-link-wrapper"),
-                overlay = document.getElementById("overlay");
+            var copylinkbtn = document.getElementById('copy-link-btn'),
+                copylink = document.getElementById('copy-link-wrapper'),
+                overlay = document.getElementById('overlay');
 
-            var url = "http://url"
-            copylinkbtn.addEventListener("click", function() {
+            var url = 'http://url';
+            copylinkbtn.addEventListener('click', function() {
 
                 var error = document.getElementsByClassName('error');
 
@@ -140,11 +143,11 @@ $(document).ready(function() {
                 copylink.children[1].select();
             }, false);
 
-            overlay.addEventListener("click", function() {
+            overlay.addEventListener('click', function() {
                 document.body.className = '';
             }, false);
 
-            copylink.children[1].addEventListener("keydown", function(e) {
+            copylink.children[1].addEventListener('keydown', function(e) {
 
                 var error = document.getElementsByClassName('error');
 
@@ -167,15 +170,15 @@ $(document).ready(function() {
                 }, 100);
 
                 function isTextSelected(input) {
-                    if (typeof input.selectionStart == "number") {
-                        return input.selectionStart == 0 && input.selectionEnd == input.value.length;
-                    } else if (typeof document.selection != "undefined") {
+                    if (typeof input.selectionStart === 'number') {
+                        return input.selectionStart === 0 && input.selectionEnd === input.value.length;
+                    } else if (typeof document.selection !== 'undefined') {
                         input.focus();
-                        return document.selection.createRange().text == input.value;
+                        return document.selection.createRange().text === input.value;
                     }
                 }
             }, false);
         })();
-    };
+    }
 
 })();
